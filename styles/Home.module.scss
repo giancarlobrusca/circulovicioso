@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Shippori+Antique&display=swap");
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #211c20;
+}
+
+.main {
+  width: 100%;
+  text-align: center;
+
+  section {
+    font-family: "Shippori Antique", sans-serif;
+    color: white;
+
+    a {
+      transition: all 0.2s ease-in;
+
+      &:hover {
+        color: rgb(251, 37, 112);
+      }
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  flex: 1;
+  padding: 2rem 0;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
+}
+
+.youtubebtn {
+  cursor: pointer;
+  color: white;
+  font-size: 3rem;
+  background-color: transparent;
+  border: none;
+  transition: all 0.2s ease-in;
+
+  &:hover {
+    color: rgb(251, 37, 112);
+    transform: translateY(-5px);
+  }
+}
+
+.socials {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+
+  button {
+    cursor: pointer;
+    color: white;
+    font-size: 1rem;
+    background-color: transparent;
+    border: none;
+    transition: all 0.2s ease-in;
+  }
+
+  .cafecito {
+    &:hover {
+      color: rgb(40, 64, 117);
+    }
+  }
+
+  .twitter {
+    &:hover {
+      color: cyan;
+    }
+  }
+}
