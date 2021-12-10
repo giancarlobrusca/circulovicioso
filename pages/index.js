@@ -41,7 +41,7 @@ export default function Home() {
               Juan Ruocco
             </a>
           </h2>
-          <h2>Bitcoin, hongos 🍄, monos 🐒 y ranas 🐸.</h2>
+          <h3>Bitcoin, hongos 🍄, monos 🐒 y ranas 🐸.</h3>
           <a
             href="https://www.youtube.com/c/CirculoVicioso8"
             target="_blank"
@@ -51,7 +51,7 @@ export default function Home() {
               <AiFillYoutube />
             </button>
           </a>
-          <h3>MIE 21:00h (GMT-3)</h3>
+          <h4>MIE 21:00h (GMT-3)</h4>
           <div className={styles.socials}>
             <a
               href="https://twitter.com/circulovicioso8"
