@@ -37,7 +37,7 @@ const CHANNEL_ID = "UC8yfD9EM8OH_H3HsnR0Szrw";
 
 export async function getServerSideProps() {
   const res = await fetch(
-    `${YOUTUBE_SEARCH_API}&order=date&maxResults=50&part=snippet&channelId=${CHANNEL_ID}&key=${process.env.YOUTUBE_API_KEY}`,
+    `${YOUTUBE_SEARCH_API}&order=date&maxResults=50&part=snippet&channelId=${CHANNEL_ID}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}`,
     {
       type: "get",
     }
