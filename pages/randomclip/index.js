@@ -2,7 +2,7 @@ import Head from "next/head";
 import React from "react";
 import styles from "./clips.module.scss";
 
-export default function Home({ data }) {
+export default function RandomClip({ data }) {
   return (
     <div className={styles.container}>
       <Head>
