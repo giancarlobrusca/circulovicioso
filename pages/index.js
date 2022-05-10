@@ -1,11 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
-import { TwitchEmbed, TwitchChat, TwitchPlayer } from "react-twitch-embed";
 import { AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
 import { FaCoffee } from "react-icons/fa";
 import styles from "../styles/Home.module.scss";
 
-export default function Home() {
+export default function Home({ data }) {
+  console.log({ data });
   return (
     <div className={styles.container}>
       <Head>
@@ -14,12 +14,16 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <TwitchEmbed
+        <iframe
           width="100%"
           height="100%"
-          channel="circulovicioso8"
-          id="circulovicioso8"
-          theme="dark"
+          src={`https://www.youtube.com/embed/${
+            data[Math.floor(Math.random() * data.length)].id.videoId
+          }`}
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
         />
         <div>
           <Image
@@ -87,4 +91,25 @@ export default function Home() {
       <footer className={styles.footer}></footer>
     </div>
   );
+}
+
+const YOUTUBE_SEARCH_API = "https://www.googleapis.com/youtube/v3/search?";
+const CHANNEL_ID = "UCVvXKi8_WUIO85hCllKhQBg";
+
+export async function getServerSideProps() {
+  const res = await fetch(
+    `${YOUTUBE_SEARCH_API}&type=video&eventType=completed&maxResults=50&part=snippet&channelId=${CHANNEL_ID}&key=${process.env.YOUTUBE_API_KEY}`,
+    {
+      type: "get",
+    }
+  );
+  const data = await res.json();
+
+  console.log({ data });
+
+  return {
+    props: {
+      data: data.items,
+    },
+  };
 }
