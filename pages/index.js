@@ -7,7 +7,7 @@ import styles from "../styles/Home.module.scss";
 export default function Home({ past, live }) {
   function getVideoSrc() {
     if (live.length > 0) {
-      return `https://www.youtube.com/embed/${live.id.videoId}`;
+      return `https://www.youtube.com/embed/${live[0].id.videoId}`;
     } else {
       return `https://www.youtube.com/embed/${
         past[Math.floor(Math.random() * past.length)].id.videoId
