@@ -4,8 +4,17 @@ import { AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
 import { FaCoffee } from "react-icons/fa";
 import styles from "../styles/Home.module.scss";
 
-export default function Home({ data }) {
-  console.log({ data });
+export default function Home({ past, live }) {
+  function getVideoSrc() {
+    if (live.length > 0) {
+      return `https://www.youtube.com/embed/${live.id.videoId}`;
+    } else {
+      return `https://www.youtube.com/embed/${
+        past[Math.floor(Math.random() * past.length)].id.videoId
+      }`;
+    }
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -17,9 +26,7 @@ export default function Home({ data }) {
         <iframe
           width="100%"
           height="100%"
-          src={`https://www.youtube.com/embed/${
-            data[Math.floor(Math.random() * data.length)].id.videoId
-          }`}
+          src={getVideoSrc()}
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -97,19 +104,27 @@ const YOUTUBE_SEARCH_API = "https://www.googleapis.com/youtube/v3/search?";
 const CHANNEL_ID = "UCVvXKi8_WUIO85hCllKhQBg";
 
 export async function getServerSideProps() {
-  const res = await fetch(
+  const resLive = await fetch(
+    `${YOUTUBE_SEARCH_API}&type=video&eventType=live&part=snippet&channelId=${CHANNEL_ID}&key=${process.env.YOUTUBE_API_KEY}`,
+    {
+      type: "get",
+    }
+  );
+
+  const resPastTranmissions = await fetch(
     `${YOUTUBE_SEARCH_API}&type=video&eventType=completed&maxResults=50&part=snippet&channelId=${CHANNEL_ID}&key=${process.env.YOUTUBE_API_KEY}`,
     {
       type: "get",
     }
   );
-  const data = await res.json();
 
-  console.log({ data });
+  const dataLive = await resLive.json();
+  const dataPastTransmissions = await resPastTranmissions.json();
 
   return {
     props: {
-      data: data.items,
+      past: dataPastTransmissions.items,
+      live: dataLive.items,
     },
   };
 }
