@@ -6,13 +6,15 @@ import styles from "../styles/Home.module.scss";
 
 export default function Home({ past, live }) {
   function getVideoSrc() {
-    if (live.length > 0) {
-      return `https://www.youtube.com/embed/${live[0].id.videoId}`;
-    } else {
-      return `https://www.youtube.com/embed/${
-        past[Math.floor(Math.random() * past.length)].id.videoId
-      }`;
-    }
+    // if (live.length > 0) {
+    //   return `https://www.youtube.com/embed/${live[0].id.videoId}`;
+    // } else {
+    //   return `https://www.youtube.com/embed/${
+    //     past[Math.floor(Math.random() * past.length)].id.videoId
+    //   }`;
+    // }
+
+    return "https://www.youtube.com/embed/GTFn1AU0mto";
   }
 
   return (
@@ -116,28 +118,22 @@ export default function Home({ past, live }) {
 const YOUTUBE_SEARCH_API = "https://www.googleapis.com/youtube/v3/search?";
 const CHANNEL_ID = "UCVvXKi8_WUIO85hCllKhQBg";
 
-export async function getServerSideProps() {
-  const resLive = await fetch(
-    `${YOUTUBE_SEARCH_API}&type=video&eventType=live&part=snippet&channelId=${CHANNEL_ID}&key=${process.env.YOUTUBE_API_KEY}`,
-    {
-      type: "get",
-    }
-  );
+// export async function getStaticProps() {
+//   const resLive = await fetch(
+//     `${YOUTUBE_SEARCH_API}&type=video&eventType=live&channelId=${CHANNEL_ID}&key=${process.env.YOUTUBE_API_KEY}&part=snippet`
+//   );
 
-  const resPastTranmissions = await fetch(
-    `${YOUTUBE_SEARCH_API}&type=video&eventType=completed&maxResults=50&part=snippet&channelId=${CHANNEL_ID}&key=${process.env.YOUTUBE_API_KEY}`,
-    {
-      type: "get",
-    }
-  );
+//   const resPastTranmissions = await fetch(
+//     `${YOUTUBE_SEARCH_API}&type=video&eventType=completed&maxResults=50&channelId=${CHANNEL_ID}&key=${process.env.YOUTUBE_API_KEY}&part=snippet`
+//   );
 
-  const dataLive = await resLive.json();
-  const dataPastTransmissions = await resPastTranmissions.json();
+//   const dataLive = await resLive.json();
+//   const dataPastTransmissions = await resPastTranmissions?.json();
 
-  return {
-    props: {
-      past: dataPastTransmissions.items,
-      live: dataLive.items,
-    },
-  };
-}
+//   return {
+//     props: {
+//       past: dataPastTransmissions.items,
+//       live: dataLive.items,
+//     },
+//   };
+// }
