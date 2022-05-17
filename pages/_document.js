@@ -5,6 +5,7 @@ class MyDocument extends Document {
     return (
       <Html lang="es">
         <Head>
+          <meta name="robots" content="all" />
           <link
             href="https://fonts.googleapis.com/css2?family=Shippori+Antique&display=swap"
             rel="stylesheet"

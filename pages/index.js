@@ -18,8 +18,21 @@ export default function Home({ past, live }) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Círculo Vicioso Podcast</title>
-        <meta name="description" content="Aguante El Círculo papá" />
+        <title>Círculo Vicioso Podcast | Bitcoin, hongos, monos y ranas</title>
+        <meta
+          name="description"
+          content="Un podcast conducido por Pablo Wasserman y Juan Ruocco."
+          key="desc"
+        />
+        <meta property="og:title" content="La web oficial de Círculo Vicioso" />
+        <meta
+          property="og:description"
+          content="En vivo los miércoles a las 21:00hs (GMT-3)"
+        />
+        <meta
+          property="og:image"
+          content="https://pbs.twimg.com/profile_banners/1247663322507468800/1591299379/1500x500"
+        />
       </Head>
 
       <main className={styles.main}>
