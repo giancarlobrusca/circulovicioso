@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
-import { FaCoffee } from "react-icons/fa";
+import { FaTiktok } from "react-icons/fa";
 import styles from "../styles/Home.module.scss";
 
 export default function Home({ past, live }) {
@@ -41,8 +41,8 @@ export default function Home({ past, live }) {
           />
           <section>
             <h1>Círculo Vicioso</h1>
+            Un podcast conducido por <br />
             <h2>
-              Un podcast conducido por{" "}
               <a
                 href="https://twitter.com/pablowasserman"
                 target="_blank"
@@ -82,12 +82,12 @@ export default function Home({ past, live }) {
                 </button>
               </a>
               <a
-                href="https://cafecito.app/circulovicioso"
+                href="https://www.tiktok.com/@circulovicioso"
                 target="_blank"
                 rel="noreferrer"
               >
-                <button className={styles.cafecito}>
-                  <FaCoffee />
+                <button className={styles.tiktok}>
+                  <FaTiktok />
                 </button>
               </a>
             </div>

@@ -25,6 +25,7 @@
   text-align: center;
 
   section {
+    font-size: 0.8rem;
     font-family: "Shippori Antique", sans-serif;
     color: white;
 
@@ -39,10 +40,11 @@
 
     h1 {
       font-size: 2rem;
+      margin-bottom: 20px;
     }
 
     h2 {
-      font-size: 1.2rem;
+      font-size: 1rem;
       margin-bottom: 20px;
     }
 
@@ -101,13 +103,15 @@
     transition: all 0.2s ease-in;
   }
 
-  .cafecito {
+  .tiktok {
+    font-size: 1rem;
     &:hover {
-      color: rgb(40, 64, 117);
+      color: rgb(233, 85, 142);
     }
   }
 
   .twitter {
+    font-size: 1.2rem;
     &:hover {
       color: cyan;
     }
