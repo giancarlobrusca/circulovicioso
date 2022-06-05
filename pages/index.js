@@ -14,7 +14,7 @@ export default function Home({ past, live }) {
     //   }`;
     // }
 
-    return "https://www.youtube.com/embed/GTFn1AU0mto";
+    return "https://www.youtube.com/embed/WeDuytZKCSY";
   }
 
   return (
