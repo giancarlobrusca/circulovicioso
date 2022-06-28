@@ -5,7 +5,6 @@ import { FaDiscord, FaTiktok } from "react-icons/fa";
 import styles from "../styles/Home.module.scss";
 
 export default function Home({ data }) {
-  console.log({ data });
   function getVideoSrc() {
     return `https://www.youtube.com/embed/${data?.[0].id.videoId}`;
   }

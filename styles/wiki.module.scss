@@ -1,0 +1,31 @@
+.main {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  background-color: #211c20;
+
+  section {
+    width: 20%;
+    color: #211c20;
+    background-color: white;
+
+    ul {
+      list-style: none;
+
+      li {
+        cursor: pointer;
+        padding: 20px;
+      }
+    }
+  }
+
+  article {
+    width: 80%;
+    padding: 20px;
+
+    p {
+      margin: 10px 0;
+    }
+  }
+}
