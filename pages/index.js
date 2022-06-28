@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
-import { FaTiktok } from "react-icons/fa";
+import { FaDiscord, FaTiktok } from "react-icons/fa";
 import styles from "../styles/Home.module.scss";
 
 export default function Home({ data }) {
@@ -96,6 +96,15 @@ export default function Home({ data }) {
               >
                 <button className={styles.tiktok}>
                   <FaTiktok />
+                </button>
+              </a>
+              <a
+                href="https://discord.gg/5ueU2Ddp"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <button className={styles.discord}>
+                  <FaDiscord />
                 </button>
               </a>
             </div>
