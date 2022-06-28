@@ -6,7 +6,7 @@ import { AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
 import { FaTiktok } from "react-icons/fa";
 import styles from "../styles/Home.module.scss";
 
-const Bunny = dynamic(() => import("./bunny"), {
+const Bunny = dynamic(() => import("../components/bunny"), {
   ssr: false,
 });
 
