@@ -4,17 +4,10 @@ import { AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
 import { FaTiktok } from "react-icons/fa";
 import styles from "../styles/Home.module.scss";
 
-export default function Home({ past, live }) {
+export default function Home({ data }) {
+  console.log({ data });
   function getVideoSrc() {
-    // if (live.length > 0) {
-    //   return `https://www.youtube.com/embed/${live[0].id.videoId}`;
-    // } else {
-    //   return `https://www.youtube.com/embed/${
-    //     past[Math.floor(Math.random() * past.length)].id.videoId
-    //   }`;
-    // }
-
-    return "https://www.youtube.com/embed/WeDuytZKCSY";
+    return `https://www.youtube.com/embed/${data?.[0].id.videoId}`;
   }
 
   return (
@@ -115,25 +108,23 @@ export default function Home({ past, live }) {
   );
 }
 
-const YOUTUBE_SEARCH_API = "https://www.googleapis.com/youtube/v3/search?";
+const YOUTUBE_SEARCH_API = "https://youtube.googleapis.com/youtube/v3/search";
 const CHANNEL_ID = "UCVvXKi8_WUIO85hCllKhQBg";
 
-// export async function getStaticProps() {
-//   const resLive = await fetch(
-//     `${YOUTUBE_SEARCH_API}&type=video&eventType=live&channelId=${CHANNEL_ID}&key=${process.env.YOUTUBE_API_KEY}&part=snippet`
-//   );
+export async function getStaticProps() {
+  const res = await fetch(
+    `${YOUTUBE_SEARCH_API}?part=snippet&channelId=${CHANNEL_ID}&eventType=completed&maxResults=1&order=date&type=video&key=${process.env.YOUTUBE_API_KEY}`,
+    {
+      type: "get",
+    }
+  );
 
-//   const resPastTranmissions = await fetch(
-//     `${YOUTUBE_SEARCH_API}&type=video&eventType=completed&maxResults=50&channelId=${CHANNEL_ID}&key=${process.env.YOUTUBE_API_KEY}&part=snippet`
-//   );
+  const data = await res.json();
 
-//   const dataLive = await resLive.json();
-//   const dataPastTransmissions = await resPastTranmissions?.json();
-
-//   return {
-//     props: {
-//       past: dataPastTransmissions.items,
-//       live: dataLive.items,
-//     },
-//   };
-// }
+  return {
+    props: {
+      data: data.items,
+    },
+    revalidate: 604800,
+  };
+}
