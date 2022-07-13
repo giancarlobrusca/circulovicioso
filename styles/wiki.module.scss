@@ -6,26 +6,121 @@
   background-color: #211c20;
 
   section {
-    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 300px;
+    height: 100vh;
     color: #211c20;
     background-color: white;
 
     ul {
       list-style: none;
+      padding: 0;
 
       li {
         cursor: pointer;
         padding: 20px;
+
+        &:hover {
+          color: white;
+          background-color: rgb(251, 37, 112);
+        }
+      }
+    }
+
+    button {
+      cursor: pointer;
+      color: white;
+      margin: 10px;
+      padding: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: rgb(251, 37, 112);
+      font-size: 1.1rem;
+      transition: all 0.3s ease-out;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
       }
     }
   }
 
   article {
-    width: 80%;
     padding: 20px;
+
+    h1 {
+      margin-bottom: 50px;
+    }
 
     p {
       margin: 10px 0;
     }
   }
+}
+
+.searchBar {
+  width: 280px;
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+
+  &:focus {
+    border: 2px solid rgb(251, 37, 112);
+    outline: 0;
+  }
+}
+
+.dialog {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 70%;
+  height: 400px;
+  background-color: white;
+  z-index: 2;
+  padding: 20px;
+
+  form {
+    height: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    input,
+    textarea,
+    button {
+      padding: 10px;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      padding: 20px 10px;
+      background-color: rgb(251, 37, 112);
+    }
+  }
+}
+.dialogBackground {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }
