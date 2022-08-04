@@ -98,7 +98,7 @@ export default function Home({ data }) {
                 </button>
               </a>
               <a
-                href="https://discord.gg/5ueU2Ddp"
+                href="https://discord.com/invite/G8UPtprX2m"
                 target="_blank"
                 rel="noreferrer"
               >
