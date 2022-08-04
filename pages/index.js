@@ -48,8 +48,8 @@ export default function Home({ data }) {
           />
           <section>
             <h1>Círculo Vicioso</h1>
-            Un podcast conducido por <br />
             <h2>
+              Un podcast conducido por <br />
               <a
                 href="https://twitter.com/pablowasserman"
                 target="_blank"
