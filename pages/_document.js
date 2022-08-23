@@ -7,7 +7,7 @@ class MyDocument extends Document {
         <Head>
           <meta
             name="google-site-verification"
-            content="o_S9STYPIw_XSIY00Dhrr8tjSgdAlDyTnIUoan8aD68"
+            content="yeI0308CdoLErPEFN5rmzS8R9mBU32RViqbydNUWxbE"
           />
           <meta name="robots" content="all" />
           <link
