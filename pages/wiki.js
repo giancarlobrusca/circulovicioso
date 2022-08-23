@@ -1,7 +1,46 @@
+import { PortableTextEditor } from "@sanity/portable-text-editor";
 import Image from "next/image";
 import { useState } from "react";
+import PortableText from "react-portable-text";
 import { getWiki } from "../lib/api";
 import styles from "../styles/wiki.module.scss";
+
+async function handleFormSubmit(event) {
+  event.preventDefault();
+
+  console.log("value", event.target.content.value);
+
+  const paragraphs = event.target.content.value.split("\n");
+
+  console.log({ paragraphs });
+
+  const block = paragraphs.map((p) => ({
+    type: "block",
+    p,
+  }));
+
+  const data = {
+    title: event.target.title.value,
+    imgurl: event.target.image.value,
+    content: block,
+  };
+
+  try {
+    const res = await fetch("/api/request-article", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const jsonResponse = await res.json();
+
+    console.log(jsonResponse);
+  } catch (e) {
+    console.error(e);
+  }
+}
 
 function ArticleForm({ onClose }) {
   return (
@@ -9,10 +48,17 @@ function ArticleForm({ onClose }) {
       <div className={styles.dialogBackground} onClick={onClose} />
       <div className={styles.dialog}>
         <h2>Proponé un nuevo artículo</h2>
-        <form>
+        <form onSubmit={handleFormSubmit}>
           <div>
             <input name="title" type="text" placeholder="Título" />
-            <textarea name="title" type="text" placeholder="Contenido" />
+            <input name="image" type="text" placeholder="URL de la portada" />
+            {/* <textarea
+              rows={4}
+              name="content"
+              type="text"
+              placeholder="Contenido"
+            /> */}
+            <PortableTextEditor />
           </div>
           <button type="submit">Proponer</button>
         </form>
@@ -66,9 +112,10 @@ export default function Wiki({ wiki }) {
           {selected && (
             <>
               <h2>{selected.title}</h2>
-              {selected.content.map((block) => (
+              {/* {selected.content.map((block) => (
                 <p key={block.children[0].text}>{block.children[0].text}</p>
-              ))}
+              ))} */}
+              <PortableText content={selected.content} />
             </>
           )}
         </article>
