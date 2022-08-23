@@ -33,12 +33,12 @@ export default function Home({ data }) {
         <iframe
           width="100%"
           height="100%"
-          src={getVideoSrc()}
-          title="YouTube video player"
+          src="https://www.youtube.com/embed/videoseries?list=UUVvXKi8_WUIO85hCllKhQBg"
+          title="Círculo Vicioso Podcast"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-        />
+        ></iframe>
         <div>
           <Image
             width={400}
