@@ -1,21 +1,134 @@
-import Image from "next/image";
-import { useState } from "react";
-import { getWiki } from "../lib/api";
+import "@uiw/react-md-editor/markdown-editor.css";
 import styles from "../styles/wiki.module.scss";
 
+import Image from "next/image";
+import dynamic from "next/dynamic";
+
+import { useState } from "react";
+import { serialize } from "next-mdx-remote/serialize";
+import { getWiki } from "../lib/api";
+import { MDXRemote } from "next-mdx-remote";
+
+const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
+
+const EDIT = "edit";
+const PREVIEW = "preview";
+
+const IDLE = "idle";
+const WAITING = "waiting";
+const SUCCESS = "success";
+const ERROR = "error";
+
 function ArticleForm({ onClose }) {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [mode, setMode] = useState(EDIT);
+  const [status, setStatus] = useState(IDLE);
+
+  async function handleFormSubmit(title, content) {
+    const data = {
+      title,
+      content,
+      status: "draft",
+    };
+
+    try {
+      setStatus(WAITING);
+      const res = await fetch("/api/request-article", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const jsonResponse = await res.json();
+
+      if (jsonResponse.status === "success") {
+        setStatus(SUCCESS);
+      } else {
+        setStatus(ERROR);
+      }
+    } catch (e) {
+      setStatus(ERROR);
+      console.error(e);
+    }
+  }
+
   return (
     <>
       <div className={styles.dialogBackground} onClick={onClose} />
       <div className={styles.dialog}>
         <h2>Proponé un nuevo artículo</h2>
-        <form>
+        <section>
           <div>
-            <input name="title" type="text" placeholder="Título" />
-            <textarea name="title" type="text" placeholder="Contenido" />
+            <input
+              type="text"
+              placeholder="Título"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 10,
+                marginBottom: "-10px",
+                fontSize: 13,
+              }}
+            >
+              <button
+                className={styles["md-btn"]}
+                onClick={() => setMode(EDIT)}
+                style={{
+                  color: mode === EDIT ? "white" : "inherit",
+                  backgroundColor: mode === EDIT ? "rgb(251, 37, 112)" : "#ddd",
+                }}
+              >
+                Write
+              </button>
+              <button
+                className={styles["md-btn"]}
+                onClick={() => setMode(PREVIEW)}
+                style={{
+                  color: mode === PREVIEW ? "white" : "inherit",
+                  backgroundColor:
+                    mode === PREVIEW ? "rgb(251, 37, 112)" : "#ddd",
+                }}
+              >
+                Preview
+              </button>
+              Este editor de texto usa
+              <a
+                style={{ color: "rgb(251,37,112)" }}
+                href="https://www.markdownguide.org/basic-syntax"
+                target="_blank"
+                rel="noreferrer"
+              >
+                las reglas de formato Markdown
+              </a>
+              (acepta links, imágenes -via link-, títulos, listas, negrita,
+              cursiva, etc)
+            </div>
+            <MDEditor
+              hideToolbar
+              height={400}
+              style={{ border: "1px solid #ccc" }}
+              preview={mode}
+              value={content}
+              onChange={setContent}
+            />
           </div>
-          <button type="submit">Proponer</button>
-        </form>
+          {status === WAITING && "Esperando..."}
+          {status === SUCCESS && "Gracias por contribuir!!"}
+          <button
+            className={styles["submit-btn"]}
+            onClick={() => handleFormSubmit(title, content)}
+          >
+            Proponer
+          </button>
+        </section>
       </div>
     </>
   );
@@ -41,7 +154,13 @@ export default function Wiki({ wiki }) {
               placeholder="Buscar artículo"
               onChange={(e) => setSearch(e.target.value)}
             />
-            <ul>
+            <ul
+              style={{
+                height: "80vh",
+                overflow: "auto",
+                border: "1px solid #ccc",
+              }}
+            >
               {filteredResults.map((article) => (
                 <li onClick={() => setSelected(article)} key={article.title}>
                   {article.title}
@@ -54,21 +173,27 @@ export default function Wiki({ wiki }) {
           </button>
         </section>
         <article>
-          <h1 style={{ display: "flex", alignItems: "center", gap: 20 }}>
+          <h1
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+              gap: 20,
+              margin: 0,
+            }}
+          >
             <Image
-              width={100}
-              height={100}
+              width={50}
+              height={50}
               src="/circulo400x400.jpeg"
               alt="Circulo logo"
             />
-            La Wiki oficial del Círculo
+            La wiki oficial de Círculo Vicioso
           </h1>
           {selected && (
             <>
               <h2>{selected.title}</h2>
-              {selected.content.map((block) => (
-                <p key={block.children[0].text}>{block.children[0].text}</p>
-              ))}
+              <MDXRemote {...selected.content} />
             </>
           )}
         </article>
@@ -81,10 +206,20 @@ export default function Wiki({ wiki }) {
 export async function getServerSideProps() {
   const wiki = await getWiki();
 
+  const mappedWiki = await Promise.all(
+    wiki.map(async (item) => {
+      const content = await serialize(item.content);
+      return {
+        title: item.title,
+        imgurl: item.imgurl,
+        content,
+      };
+    })
+  );
+
   return {
     props: {
-      wiki,
+      wiki: mappedWiki,
     },
-    // revalidate: 1,
   };
 }
