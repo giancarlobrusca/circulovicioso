@@ -1,4 +1,5 @@
 // next.config.js
+const removeImports = require("next-remove-imports")();
 
 // You can choose which headers to add to the list
 // after learning more below.
@@ -13,7 +14,7 @@ const securityHeaders = [
   },
 ];
 
-module.exports = {
+module.exports = removeImports({
   reactStrictMode: true,
   async headers() {
     return [
@@ -23,4 +24,4 @@ module.exports = {
       },
     ];
   },
-};
+});

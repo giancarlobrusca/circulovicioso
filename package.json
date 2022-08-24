@@ -9,14 +9,14 @@
   },
   "dependencies": {
     "@sanity/client": "^3.3.2",
-    "@sanity/portable-text-editor": "^2.30.5",
-    "diff-match-patch": "^1.0.5",
+    "@uiw/react-md-editor": "^3.17.2",
     "next": "12.0.4",
+    "next-mdx-remote": "^4.1.0",
+    "next-remove-imports": "^1.0.7",
     "next-sanity": "^0.5.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
-    "react-portable-text": "^0.4.3",
     "react-twitch-embed": "^2.1.0",
     "react-twitch-embed-video": "^3.0.2",
     "sass": "^1.44.0"
