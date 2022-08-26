@@ -139,7 +139,12 @@
 
   .main {
     flex-direction: column;
+    justify-content: center;
     height: auto;
+
+    .iframe-wrapper {
+      width: auto;
+    }
 
     section {
       justify-content: center;

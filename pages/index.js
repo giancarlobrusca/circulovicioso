@@ -38,8 +38,8 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles["iframe-wrapper"]}>
           <iframe
-            width="100%"
-            height="100%"
+            width={isMobileWide ? "300px" : "100%"}
+            height={isMobileWide ? "400px" : "100%"}
             src="https://www.youtube.com/embed/videoseries?list=UUVvXKi8_WUIO85hCllKhQBg"
             title="Círculo Vicioso Podcast"
             frameBorder="0"
