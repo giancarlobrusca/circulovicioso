@@ -12,36 +12,6 @@
   width: 100vw;
   height: 100vh;
   background-color: #211c20;
-
-  header {
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    top: 0;
-    width: 100vw;
-    height: 60px;
-    padding: 15px;
-    padding-left: 50px;
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.8rem;
-      color: white;
-    }
-
-    nav {
-      ul {
-        list-style: none;
-        text-transform: uppercase;
-        display: flex;
-        gap: 20px;
-        padding-right: 20px;
-        color: white;
-      }
-    }
-  }
 }
 
 .main {
@@ -158,6 +128,23 @@
     font-size: 1.2rem;
     &:hover {
       color: rgb(221, 42, 123);
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    height: auto;
+  }
+
+  .main {
+    flex-direction: column;
+    height: auto;
+
+    section {
+      iframe {
+        margin-bottom: 20px;
+      }
     }
   }
 }

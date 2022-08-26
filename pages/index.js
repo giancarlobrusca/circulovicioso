@@ -1,15 +1,20 @@
+import styles from "../styles/Home.module.scss";
+
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
+
 import {
   AiFillInstagram,
   AiFillYoutube,
   AiOutlineTwitter,
 } from "react-icons/ai";
 import { FaDiscord, FaTiktok } from "react-icons/fa";
-import styles from "../styles/Home.module.scss";
+
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 export default function Home() {
+  const isMobileWide = useMediaQuery("(max-width: 400px)");
+
   return (
     <div className={styles.container}>
       <Head>
@@ -29,32 +34,6 @@ export default function Home() {
           content="https://pbs.twimg.com/profile_banners/1247663322507468800/1591299379/1500x500"
         />
       </Head>
-
-      <header>
-        <div className={styles.logo}>
-          <Image
-            width={50}
-            height={50}
-            src="/circulo400x400.jpeg"
-            alt="Circulo logo"
-          />
-          <h1>Círculo Vicioso Club</h1>
-        </div>
-        <nav>
-          <ul>
-            <li>
-              <Link href="/">
-                <a>Home</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/wiki">
-                <a>Wiki</a>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
 
       <main className={styles.main}>
         <div className={styles["iframe-wrapper"]}>
@@ -78,7 +57,7 @@ export default function Home() {
           <section>
             <h1>Círculo Vicioso</h1>
             <h2>
-              Un podcast conducido por <br />
+              Un Club conducido por <br />
               <a
                 href="https://twitter.com/pablowasserman"
                 target="_blank"
@@ -147,8 +126,8 @@ export default function Home() {
             </div>
             <iframe
               src="https://discord.com/widget?id=723382943233474673&theme=dark"
-              width="250"
-              height="300"
+              width={isMobileWide ? "300px" : "400px"}
+              height="350"
               allowtransparency="true"
               frameBorder="0"
               sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
@@ -156,8 +135,6 @@ export default function Home() {
           </section>
         </div>
       </main>
-
-      <footer className={styles.footer}></footer>
     </div>
   );
 }
