@@ -33,7 +33,9 @@
 
 @media (max-width: 400px) {
   .header {
+    position: sticky;
     padding-left: 10px;
+    z-index: 1;
 
     .logo {
       font-size: 0.3rem;
