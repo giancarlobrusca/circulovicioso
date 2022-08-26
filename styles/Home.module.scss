@@ -6,11 +6,42 @@
 
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
   background-color: #211c20;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 60px;
+    padding: 15px;
+    padding-left: 50px;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: white;
+    }
+
+    nav {
+      ul {
+        list-style: none;
+        text-transform: uppercase;
+        display: flex;
+        gap: 20px;
+        padding-right: 20px;
+        color: white;
+      }
+    }
+  }
 }
 
 .main {
@@ -18,13 +49,23 @@
   justify-content: space-evenly;
   align-items: center;
   gap: 50px;
-  padding: 50px;
+  padding: 20px;
+  padding-top: 0px;
+  margin-top: 75px;
 
   width: 100vw;
   height: 100vh;
   text-align: center;
 
+  .iframe-wrapper {
+    width: 70%;
+    height: 100%;
+  }
+
   section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     font-size: 0.8rem;
     font-family: "Shippori Antique", sans-serif;
     color: white;
@@ -40,17 +81,14 @@
 
     h1 {
       font-size: 2rem;
-      margin-bottom: 20px;
     }
 
     h2 {
       font-size: 1rem;
-      margin-bottom: 20px;
     }
 
     h3 {
       font-size: 0.9rem;
-      margin-bottom: 10px;
     }
 
     h4 {
@@ -74,22 +112,7 @@
   }
 }
 
-.youtubebtn {
-  cursor: pointer;
-  color: white;
-  font-size: 3rem;
-  background-color: transparent;
-  border: none;
-  transition: all 0.2s ease-in;
-
-  &:hover {
-    color: rgb(251, 37, 112);
-    transform: translateY(-5px);
-  }
-}
-
 .socials {
-  margin-top: 30px;
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -101,6 +124,13 @@
     background-color: transparent;
     border: none;
     transition: all 0.2s ease-in;
+  }
+
+  .youtube {
+    font-size: 1.2rem;
+    &:hover {
+      color: rgb(251, 37, 112);
+    }
   }
 
   .tiktok {
@@ -121,6 +151,13 @@
     font-size: 1.2rem;
     &:hover {
       color: cornflowerblue;
+    }
+  }
+
+  .instagram {
+    font-size: 1.2rem;
+    &:hover {
+      color: rgb(221, 42, 123);
     }
   }
 }

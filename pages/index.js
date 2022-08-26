@@ -1,14 +1,15 @@
 import Head from "next/head";
 import Image from "next/image";
-import { AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
+import Link from "next/link";
+import {
+  AiFillInstagram,
+  AiFillYoutube,
+  AiOutlineTwitter,
+} from "react-icons/ai";
 import { FaDiscord, FaTiktok } from "react-icons/fa";
 import styles from "../styles/Home.module.scss";
 
-export default function Home({ data }) {
-  function getVideoSrc() {
-    return `https://www.youtube.com/embed/${data?.[0].id.videoId}`;
-  }
-
+export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
@@ -29,20 +30,48 @@ export default function Home({ data }) {
         />
       </Head>
 
+      <header>
+        <div className={styles.logo}>
+          <Image
+            width={50}
+            height={50}
+            src="/circulo400x400.jpeg"
+            alt="Circulo logo"
+          />
+          <h1>Círculo Vicioso Club</h1>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/wiki">
+                <a>Wiki</a>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
       <main className={styles.main}>
-        <iframe
-          width="100%"
-          height="100%"
-          src="https://www.youtube.com/embed/videoseries?list=UUVvXKi8_WUIO85hCllKhQBg"
-          title="Círculo Vicioso Podcast"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+        <div className={styles["iframe-wrapper"]}>
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/videoseries?list=UUVvXKi8_WUIO85hCllKhQBg"
+            title="Círculo Vicioso Podcast"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
         <div>
           <Image
-            width={400}
-            height={400}
+            width={150}
+            height={150}
             src="/circulo400x400.jpeg"
             alt="Circulo logo"
           />
@@ -68,17 +97,17 @@ export default function Home({ data }) {
               </a>
             </h2>
             <h3>Bitcoin, hongos 🍄, monos 🐒 y ranas 🐸.</h3>
-            <a
-              href="https://www.youtube.com/c/CirculoVicioso8"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <button className={styles.youtubebtn}>
-                <AiFillYoutube />
-              </button>
-            </a>
             <h4>MIE 21:00h (GMT-3)</h4>
             <div className={styles.socials}>
+              <a
+                href="https://www.youtube.com/c/CirculoVicioso8"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <button className={styles.youtube}>
+                  <AiFillYoutube />
+                </button>
+              </a>
               <a
                 href="https://twitter.com/circulovicioso8"
                 target="_blank"
@@ -106,7 +135,24 @@ export default function Home({ data }) {
                   <FaDiscord />
                 </button>
               </a>
+              <a
+                href="https://www.instagram.com/circuloviciosoclub/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <button className={styles.instagram}>
+                  <AiFillInstagram />
+                </button>
+              </a>
             </div>
+            <iframe
+              src="https://discord.com/widget?id=723382943233474673&theme=dark"
+              width="250"
+              height="300"
+              allowtransparency="true"
+              frameBorder="0"
+              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+            />
           </section>
         </div>
       </main>
@@ -116,23 +162,5 @@ export default function Home({ data }) {
   );
 }
 
-const YOUTUBE_SEARCH_API = "https://youtube.googleapis.com/youtube/v3/search";
-const CHANNEL_ID = "UCVvXKi8_WUIO85hCllKhQBg";
-
-export async function getStaticProps() {
-  const res = await fetch(
-    `${YOUTUBE_SEARCH_API}?part=snippet&channelId=${CHANNEL_ID}&eventType=completed&maxResults=1&order=date&type=video&key=${process.env.YOUTUBE_API_KEY}`,
-    {
-      type: "get",
-    }
-  );
-
-  const data = await res.json();
-
-  return {
-    props: {
-      data: data.items,
-    },
-    revalidate: 500000,
-  };
-}
+// const YOUTUBE_SEARCH_API = "https://youtube.googleapis.com/youtube/v3/search";
+// const CHANNEL_ID = "UCVvXKi8_WUIO85hCllKhQBg";

@@ -2,9 +2,10 @@ import "@uiw/react-md-editor/markdown-editor.css";
 import styles from "../styles/wiki.module.scss";
 
 import Image from "next/image";
+import Link from "next/link";
 import dynamic from "next/dynamic";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { serialize } from "next-mdx-remote/serialize";
 import { getWiki } from "../lib/api";
 import { MDXRemote } from "next-mdx-remote";
@@ -26,6 +27,11 @@ function ArticleForm({ onClose }) {
   const [status, setStatus] = useState(IDLE);
 
   async function handleFormSubmit(title, content) {
+    if (!title || !content) {
+      setStatus(ERROR);
+      return;
+    }
+
     const data = {
       title,
       content,
@@ -46,14 +52,19 @@ function ArticleForm({ onClose }) {
 
       if (jsonResponse.status === "success") {
         setStatus(SUCCESS);
-      } else {
-        setStatus(ERROR);
       }
     } catch (e) {
       setStatus(ERROR);
       console.error(e);
     }
   }
+
+  useEffect(() => {
+    if (status === SUCCESS) {
+      setTitle("");
+      setContent("");
+    }
+  }, [status]);
 
   return (
     <>
@@ -120,8 +131,11 @@ function ArticleForm({ onClose }) {
               onChange={setContent}
             />
           </div>
-          {status === WAITING && "Esperando..."}
-          {status === SUCCESS && "Gracias por contribuir!!"}
+          {status === ERROR &&
+            "Tenés que completar ambos campos para proponer un artículo."}
+          {status === WAITING && "Ta laburando la maquinita..."}
+          {status === SUCCESS &&
+            "Gracias por contribuir al lore del Club, gordo."}
           <button
             className={styles["submit-btn"]}
             onClick={() => handleFormSubmit(title, content)}
@@ -145,6 +159,31 @@ export default function Wiki({ wiki }) {
 
   return (
     <>
+      <header className={styles.header}>
+        <div className={styles.logo}>
+          <Image
+            width={50}
+            height={50}
+            src="/circulo400x400.jpeg"
+            alt="Circulo logo"
+          />
+          <h1>Círculo Vicioso Club</h1>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/wiki">
+                <a>Wiki</a>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
       <main className={styles.main}>
         <section>
           <div>
@@ -156,7 +195,7 @@ export default function Wiki({ wiki }) {
             />
             <ul
               style={{
-                height: "80vh",
+                height: "76vh",
                 overflow: "auto",
                 border: "1px solid #ccc",
               }}
