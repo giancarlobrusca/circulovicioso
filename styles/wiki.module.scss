@@ -66,37 +66,6 @@
   }
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  top: 0;
-  width: 100vw;
-  height: 60px;
-  padding: 15px;
-  padding-left: 50px;
-  background-color: #211c20;
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.8rem;
-    color: white;
-  }
-
-  nav {
-    ul {
-      list-style: none;
-      text-transform: uppercase;
-      display: flex;
-      gap: 20px;
-      padding-right: 20px;
-      color: white;
-    }
-  }
-}
-
 .searchBar {
   width: 280px;
   margin: 10px;
