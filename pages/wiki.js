@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { serialize } from "next-mdx-remote/serialize";
 import { getWiki } from "../lib/api";
 import { MDXRemote } from "next-mdx-remote";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
 
@@ -149,6 +150,8 @@ function ArticleForm({ onClose }) {
 }
 
 export default function Wiki({ wiki }) {
+  const isMobileWide = useMediaQuery("(max-width: 400px)");
+
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState(null);
   const [showDialog, setShowDialog] = useState(false);
@@ -170,7 +173,7 @@ export default function Wiki({ wiki }) {
             />
             <ul
               style={{
-                height: "76vh",
+                height: isMobileWide ? "auto" : "76vh",
                 overflow: "auto",
                 border: "1px solid #ccc",
               }}
@@ -194,6 +197,7 @@ export default function Wiki({ wiki }) {
               justifyContent: "flex-end",
               gap: 20,
               margin: 0,
+              marginBottom: isMobileWide && 50,
             }}
           >
             <Image

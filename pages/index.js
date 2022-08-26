@@ -10,7 +10,11 @@ import {
 } from "react-icons/ai";
 import { FaDiscord, FaTiktok } from "react-icons/fa";
 
+import { useMediaQuery } from "../hooks/useMediaQuery";
+
 export default function Home() {
+  const isMobileWide = useMediaQuery("(max-width: 400px)");
+
   return (
     <div className={styles.container}>
       <Head>
@@ -122,7 +126,7 @@ export default function Home() {
             </div>
             <iframe
               src="https://discord.com/widget?id=723382943233474673&theme=dark"
-              width="400"
+              width={isMobileWide ? "300px" : "400px"}
               height="350"
               allowtransparency="true"
               frameBorder="0"
