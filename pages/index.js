@@ -106,15 +106,6 @@ export default function Home() {
                 </button>
               </a>
               <a
-                href="https://discord.com/invite/G8UPtprX2m"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <button className={styles.discord}>
-                  <FaDiscord />
-                </button>
-              </a>
-              <a
                 href="https://www.instagram.com/circuloviciosoclub/"
                 target="_blank"
                 rel="noreferrer"
