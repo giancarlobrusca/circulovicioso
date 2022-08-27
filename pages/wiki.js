@@ -53,9 +53,11 @@ export default function Wiki({ wiki }) {
               ))}
             </ul>
           </div>
-          <button onClick={() => setShowDialog(true)}>
-            Contribuí a la Wiki
-          </button>
+          {!isMobileWide && (
+            <button onClick={() => setShowDialog(true)}>
+              Contribuí a la Wiki
+            </button>
+          )}
         </section>
         <article>
           <h1
@@ -80,9 +82,11 @@ export default function Wiki({ wiki }) {
             <>
               <h2>{selected.title}</h2>
               <MDXRemote {...selected.content} />
-              <button onClick={() => handleEditForm(selected)}>
-                <MdEdit /> Editar entrada
-              </button>
+              {!isMobileWide && (
+                <button onClick={() => handleEditForm(selected)}>
+                  <MdEdit /> Editar entrada
+                </button>
+              )}
             </>
           )}
         </article>
