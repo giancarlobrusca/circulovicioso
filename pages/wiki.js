@@ -2,8 +2,8 @@ import "@uiw/react-md-editor/markdown-editor.css";
 import styles from "../styles/wiki.module.scss";
 
 import Image from "next/image";
-import Link from "next/link";
 import dynamic from "next/dynamic";
+import emailjs from "@emailjs/browser";
 
 import { useEffect, useState } from "react";
 import { serialize } from "next-mdx-remote/serialize";
@@ -53,10 +53,17 @@ function ArticleForm({ onClose }) {
 
       if (jsonResponse.status === "success") {
         setStatus(SUCCESS);
+        emailjs.send(
+          "my_gmail",
+          "cvwikinotification",
+          { title },
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLICKEY
+        );
       }
     } catch (e) {
-      setStatus(ERROR);
       console.error(e);
+      console.error(e.text);
+      setStatus(ERROR);
     }
   }
 

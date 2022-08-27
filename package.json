@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.6.2",
     "@sanity/client": "^3.3.2",
     "@uiw/react-md-editor": "^3.17.2",
     "next": "12.0.4",
