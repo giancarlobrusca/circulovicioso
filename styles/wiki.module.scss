@@ -67,6 +67,22 @@
       letter-spacing: 2px;
       line-height: 23px;
     }
+
+    button {
+      cursor: pointer;
+      position: absolute;
+      right: 30px;
+      bottom: 30px;
+      padding: 20px;
+      color: white;
+      background-color: rgb(251, 37, 112);
+      border: none;
+      border-radius: 5px;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
   }
 }
 
@@ -81,69 +97,6 @@
     border: 2px solid rgb(251, 37, 112);
     outline: 0;
   }
-}
-
-.dialog {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  margin: 20px auto;
-  width: 70%;
-  background-color: white;
-  z-index: 2;
-  padding: 20px;
-
-  section {
-    height: 94%;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    div {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    input,
-    textarea,
-    button {
-      padding: 10px;
-    }
-
-    textarea {
-      border: 1px solid #ccc;
-      height: 400px;
-    }
-
-    .submit-btn {
-      cursor: pointer;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      padding: 20px 10px;
-      background-color: rgb(251, 37, 112);
-    }
-
-    .md-btn {
-      border: none;
-      font-size: 10px;
-      border-radius: 5px;
-      height: fit-content;
-    }
-  }
-}
-.dialogBackground {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
 }
 
 @media (max-width: 400px) {
